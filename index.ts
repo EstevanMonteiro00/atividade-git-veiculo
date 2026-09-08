@@ -55,8 +55,21 @@ function acelerar(veiculo: Veiculo): void {
 }
 
 function frear(veiculo: Veiculo): void {
-    veiculo.velocidade = Math.max(0, veiculo.velocidade - veiculo.potencia * 0.15);
-    console.log(`Velocidade: ${veiculo.velocidade.toFixed(1)} km/h`);
+    if (veiculo.velocidade === 0) {
+        console.log("O veículo já está parado.");
+        return;
+    }
+
+    const velocidadeAnterior = veiculo.velocidade;
+
+    veiculo.velocidade = Math.max(
+        0,
+        veiculo.velocidade - veiculo.potencia * 0.15
+    );
+
+    console.log(
+        `Velocidade: ${velocidadeAnterior.toFixed(1)} → ${veiculo.velocidade.toFixed(1)} km/h`
+    );
 }
 
 function subirMarcha(veiculo: Veiculo): void {
@@ -79,14 +92,13 @@ function descerMarcha(veiculo: Veiculo): void {
 
 function imprimirDados(veiculo: Veiculo): void {
     console.log("\n######## DADOS DO VEÍCULO ########");
-    console.table({
-        Marca: veiculo.marca,
-        Modelo: veiculo.modelo,
-        Potência: veiculo.potencia,
-        "Número de marchas": veiculo.numeroMarchas,
-        "Marcha atual": veiculo.marchaAtual,
-        "Velocidade (km/h)": veiculo.velocidade.toFixed(1)
-    });
+    console.log(`Marca: ${veiculo.marca}`);
+    console.log(`Modelo: ${veiculo.modelo}`);
+    console.log(`Potência: ${veiculo.potencia}`);
+    console.log(`Número de marchas: ${veiculo.numeroMarchas}`);
+    console.log(`Marcha atual: ${veiculo.marchaAtual}`);
+    console.log(`Velocidade: ${veiculo.velocidade.toFixed(1)} km/h`);
+    console.log("##################################");
 }
 
 function criaVeiculo(): Veiculo {
