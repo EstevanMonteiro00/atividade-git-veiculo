@@ -73,6 +73,12 @@ function frear(veiculo: Veiculo): void {
 }
 
 function subirMarcha(veiculo: Veiculo): void {
+    if (veiculo.velocidade === 0 && veiculo.marchaAtual === 0) {
+        veiculo.marchaAtual = 1;
+        console.log("Primeira marcha engatada.");
+        return;
+    }
+
     if (veiculo.marchaAtual < veiculo.numeroMarchas) {
         veiculo.marchaAtual++;
         console.log(`Marcha atual: ${veiculo.marchaAtual}`);
@@ -82,9 +88,12 @@ function subirMarcha(veiculo: Veiculo): void {
 }
 
 function descerMarcha(veiculo: Veiculo): void {
-    if (veiculo.marchaAtual > 0) {
+    if (veiculo.marchaAtual > 1) {
         veiculo.marchaAtual--;
         console.log(`Marcha atual: ${veiculo.marchaAtual}`);
+    } else if (veiculo.marchaAtual === 1) {
+        veiculo.marchaAtual = 0;
+        console.log("Veículo colocado em ponto morto.");
     } else {
         console.log("O veículo já está em ponto morto.");
     }
